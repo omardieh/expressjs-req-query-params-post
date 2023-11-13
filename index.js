@@ -174,6 +174,112 @@ app.get("/products/:id", (req, res) => {
   res.json(foundProduct);
 });
 
+const usersFromDB = [
+  {
+    id: 1,
+    name: "Alice",
+    books: [
+      { title: "The Catcher in the Rye", author: "J.D. Salinger" },
+      { title: "To Kill a Mockingbird", author: "Harper Lee" },
+    ],
+  },
+  {
+    id: 2,
+    name: "Bob",
+    books: [
+      { title: "1984", author: "George Orwell" },
+      { title: "Brave New World", author: "Aldous Huxley" },
+    ],
+  },
+  {
+    id: 3,
+    name: "Charlie",
+    books: [
+      { title: "The Great Gatsby", author: "F. Scott Fitzgerald" },
+      { title: "Pride and Prejudice", author: "Jane Austen" },
+    ],
+  },
+  {
+    id: 4,
+    name: "David",
+    books: [
+      { title: "The Hobbit", author: "J.R.R. Tolkien" },
+      { title: "The Lord of the Rings", author: "J.R.R. Tolkien" },
+    ],
+  },
+  {
+    id: 5,
+    name: "Emma",
+    books: [
+      {
+        title: "Harry Potter and the Sorcerer's Stone",
+        author: "J.K. Rowling",
+      },
+      {
+        title: "Harry Potter and the Chamber of Secrets",
+        author: "J.K. Rowling",
+      },
+    ],
+  },
+  {
+    id: 6,
+    name: "Frank",
+    books: [
+      { title: "The Shining", author: "Stephen King" },
+      { title: "It", author: "Stephen King" },
+    ],
+  },
+  {
+    id: 7,
+    name: "Grace",
+    books: [
+      { title: "The Da Vinci Code", author: "Dan Brown" },
+      { title: "Angels & Demons", author: "Dan Brown" },
+    ],
+  },
+  {
+    id: 8,
+    name: "Henry",
+    books: [
+      { title: "The Hunger Games", author: "Suzanne Collins" },
+      { title: "Catching Fire", author: "Suzanne Collins" },
+    ],
+  },
+  {
+    id: 9,
+    name: "Ivy",
+    books: [
+      { title: "The Alchemist", author: "Paulo Coelho" },
+      { title: "The Little Prince", author: "Antoine de Saint-Exupéry" },
+    ],
+  },
+  {
+    id: 10,
+    name: "Jack",
+    books: [
+      { title: "Moby-Dick", author: "Herman Melville" },
+      { title: "The Odyssey", author: "Homer" },
+    ],
+  },
+];
+
+app.get("/users", (req, res) => {
+  const { limit } = req.query;
+  res.json(usersFromDB.slice(0, limit));
+});
+
+app.get("/users/:id", (req, res) => {
+  const { id } = req.params;
+  const foundUser = usersFromDB.find((e) => e.id === +id);
+  res.json(foundUser);
+});
+
+app.get("/users/:id/books", (req, res) => {
+  const { id } = req.params;
+  const foundUser = usersFromDB.find((e) => e.id === +id);
+  res.json(foundUser.books);
+});
+
 // app.get("/users/:username/books/:bookId", (req, res, next) => {
 //   res.send(req.params);
 // });
